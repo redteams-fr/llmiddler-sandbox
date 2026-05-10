@@ -29,6 +29,9 @@ The goal: spin up an isolated environment where every AI CLI's traffic is automa
 
 ![Tool call](img/003.jpg)
 
+* Monitor trackers
+
+![Tool call](img/005.jpg)
 
 ---
 
