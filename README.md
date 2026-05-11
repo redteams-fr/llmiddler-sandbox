@@ -1,4 +1,4 @@
-# tests-tui — LLMiddler experimentation container
+# llmiddler-sandbox — LLMiddler experimentation container
 
 A self-contained Docker image bundling the **LLMiddler** gateway, the **`llmiddler-proxy`** transparent MITM proxy, and a curated set of AI command-line clients. 
 
@@ -82,7 +82,7 @@ make run
 Equivalent to:
 
 ```bash
-docker run --init -p 8090:8090 -p 9090:9090 --env-file ./.env -e TZ=Europe/Paris -it --rm redteamsfr/tests-tui:latest-light bash
+docker run --init -p 8090:8090 -p 9090:9090 --env-file ./.env -e TZ=Europe/Paris -it --rm redteamsfr/llmiddler-sandbox:latest-light bash
 ```
 
 The container is **disposable** (`--rm`): all in-container changes (captured sessions, vibe history, etc.) are lost on exit. Ports `8090` (LLMiddler UI) and `9090` (proxy) are published to the host, so the UI is reachable at `http://localhost:8090/_ui/`. Inside the container, CLIs reach the proxy via `localhost:9090` (the container's own loopback).
@@ -107,7 +107,7 @@ docker run --init -p 8090:8090 -p 9090:9090 \
     --env-file ./.env \
     -e TZ=Europe/Paris \
     -v "$(pwd)/mount:/workspace/mount" \
-    -it --rm redteamsfr/tests-tui:latest-light bash
+    -it --rm redteamsfr/llmiddler-sandbox:latest-light bash
 ```
 
 The container's default `WORKDIR` is `/workspace`, so once inside you can `cd mount/` and operate on those files. Use `:ro` (e.g. `-v "$(pwd)/mount:/workspace/mount:ro"`) for a read-only mount.
@@ -141,13 +141,13 @@ The LLMiddler UI is reachable from the Windows browser at <http://localhost:8090
 
 ```powershell
 # pull
-docker pull redteamsfr/tests-tui:latest-light
+docker pull redteamsfr/llmiddler-sandbox:latest-light
 
 # run (note: ${PWD} in PowerShell, not $(pwd))
 docker run --init -p 8090:8090 -p 9090:9090 `
     --env-file .\.env `
     -e TZ=Europe/Paris `
-    -it --rm redteamsfr/tests-tui:latest-light bash
+    -it --rm redteamsfr/llmiddler-sandbox:latest-light bash
 ```
 
 With a bind mount:
@@ -157,7 +157,7 @@ docker run --init -p 8090:8090 -p 9090:9090 `
     --env-file .\.env `
     -e TZ=Europe/Paris `
     -v "${PWD}\mount:/workspace/mount" `
-    -it --rm redteamsfr/tests-tui:latest-light bash
+    -it --rm redteamsfr/llmiddler-sandbox:latest-light bash
 ```
 
 ### Option 3 — `cmd.exe`
@@ -167,7 +167,7 @@ docker run --init -p 8090:8090 -p 9090:9090 ^
     --env-file .\.env ^
     -e TZ=Europe/Paris ^
     -v "%cd%\mount:/workspace/mount" ^
-    -it --rm redteamsfr/tests-tui:latest-light bash
+    -it --rm redteamsfr/llmiddler-sandbox:latest-light bash
 ```
 
 ### Common Windows pitfalls

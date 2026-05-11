@@ -3,14 +3,14 @@
 .DEFAULT_GOAL := help
 
 # Variables
-IMAGE_NAME ?= redteamsfr/tests-tui
+IMAGE_NAME ?= redteamsfr/llmiddler-sandbox
 IMAGE_TAG  ?= latest-light
 ENV_FILE   ?= ./.env
 TZ         ?= Europe/Paris
 
 
 help:
-	@echo "tests-tui - Commandes disponibles:"
+	@echo "llmiddler-sandbox - Commandes disponibles:"
 	@echo ""
 	@echo "  make run          - Lancer un conteneur interactif (image complète)"
 	@echo "  make shell        - Alias de 'run'"
@@ -19,7 +19,7 @@ help:
 	@echo "Variables:"
 	@echo "  IMAGE_NAME=$(IMAGE_NAME)"
 	@echo "  IMAGE_TAG=$(IMAGE_TAG)"
-	@echo "  ENV_FILE=$(ENV_FILE)  (relatif au dossier tests-tui)"
+	@echo "  ENV_FILE=$(ENV_FILE)  (relatif au dossier llmiddler-sandbox)"
 	@echo "  TZ=$(TZ)"
 	@echo ""
 
