@@ -29,5 +29,5 @@ pull:
 shell: run
 
 run: pull
-	docker run --init -p 8090:8090 -p 9090:9090 --env-file $(ENV_FILE) -e TZ=$(TZ) -it --rm $(IMAGE_NAME):$(IMAGE_TAG) bash
+	docker run --init --name llmiddler-sandbox --hostname llmiddler-sandbox -p 8090:8090 -p 9090:9090 --env-file $(ENV_FILE) -e TZ=$(TZ) -it --rm $(IMAGE_NAME):$(IMAGE_TAG) bash
 

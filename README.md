@@ -82,7 +82,7 @@ make run
 Equivalent to:
 
 ```bash
-docker run --init -p 8090:8090 -p 9090:9090 --env-file ./.env -e TZ=Europe/Paris -it --rm redteamsfr/llmiddler-sandbox:latest-light bash
+docker run --init --name llmiddler-sandbox --hostname llmiddler-sandbox -p 8090:8090 -p 9090:9090 --env-file ./.env -e TZ=Europe/Paris -it --rm redteamsfr/llmiddler-sandbox:latest-light bash
 ```
 
 The container is **disposable** (`--rm`): all in-container changes (captured sessions, vibe history, etc.) are lost on exit. Ports `8090` (LLMiddler UI) and `9090` (proxy) are published to the host, so the UI is reachable at `http://localhost:8090/_ui/`. Inside the container, CLIs reach the proxy via `localhost:9090` (the container's own loopback).
@@ -103,7 +103,8 @@ If you want to expose host files to the CLIs (e.g. a workspace to feed to `vibe`
 Example mounting `./mount/` into the container's working directory at `/workspace/mount`:
 
 ```bash
-docker run --init -p 8090:8090 -p 9090:9090 \
+docker run --init --name llmiddler-sandbox --hostname llmiddler-sandbox \
+    -p 8090:8090 -p 9090:9090 \
     --env-file ./.env \
     -e TZ=Europe/Paris \
     -v "$(pwd)/mount:/workspace/mount" \
@@ -144,7 +145,8 @@ The LLMiddler UI is reachable from the Windows browser at <http://localhost:8090
 docker pull redteamsfr/llmiddler-sandbox:latest-light
 
 # run (note: ${PWD} in PowerShell, not $(pwd))
-docker run --init -p 8090:8090 -p 9090:9090 `
+docker run --init --name llmiddler-sandbox --hostname llmiddler-sandbox `
+    -p 8090:8090 -p 9090:9090 `
     --env-file .\.env `
     -e TZ=Europe/Paris `
     -it --rm redteamsfr/llmiddler-sandbox:latest-light bash
@@ -153,7 +155,8 @@ docker run --init -p 8090:8090 -p 9090:9090 `
 With a bind mount:
 
 ```powershell
-docker run --init -p 8090:8090 -p 9090:9090 `
+docker run --init --name llmiddler-sandbox --hostname llmiddler-sandbox `
+    -p 8090:8090 -p 9090:9090 `
     --env-file .\.env `
     -e TZ=Europe/Paris `
     -v "${PWD}\mount:/workspace/mount" `
@@ -163,7 +166,8 @@ docker run --init -p 8090:8090 -p 9090:9090 `
 ### Option 3 — `cmd.exe`
 
 ```cmd
-docker run --init -p 8090:8090 -p 9090:9090 ^
+docker run --init --name llmiddler-sandbox --hostname llmiddler-sandbox ^
+    -p 8090:8090 -p 9090:9090 ^
     --env-file .\.env ^
     -e TZ=Europe/Paris ^
     -v "%cd%\mount:/workspace/mount" ^
